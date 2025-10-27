@@ -78,7 +78,32 @@ int main() {
  
      return choice;
  }
-
-void add_goat(list<Goat> &trip, string names[], string colors[]);
+void add_goat(list<Goat> &trip, string names[], string colors[]){
 int nNames = 0;
-while 
+while (nNames < SZ_NAMES && !names[nNames].empty())++nNames;
+ int nColors = 0;
+    while (nColors < SZ_COLORS && !colors[nColors].empty())++nColors;
+
+    int nameIdx = rand() % nNames;
+    int colorIdx = rand() % nColors;
+    int age = rand() % MAX_AGE + 1;
+
+    Goat g(names[nameIdx], colors[colorIdx], age);
+    trip.push_back(g);
+    cout << "Added: " << g.getName() << " (" << g.getAge() << ")\n";
+}
+cout << "[0] cancel\nchoice -->";
+ int choice
+
+void delete_goat(list<Goat> &trip){
+    int choice = select_goat(trip);
+    if (choice<= 0){
+        cout << "Cancelled.\n";
+        return;
+    }
+    auto it = trip.begin();
+    advance(it, choice - 1);
+
+    cout << "Deleted: " << it->getName() << " (" << it ->getAge
+
+        }
