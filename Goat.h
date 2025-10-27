@@ -13,7 +13,9 @@ private:
 public: 
     Goat()                          { name = ""; age = 0; color = ""; }
     // write three more constructors
-
+    Goat(string a)                   { name = a; age = 0; color = ""; }
+    Goat(string a, int b)             { name = a; age = b; color = ""; }
+    Goat(string a, int b, string c)   { name = a; age = b; color = c; }
     // setters and getters
     void set_name(string n)         { name = n; };
     string get_name() const         { return name; };
