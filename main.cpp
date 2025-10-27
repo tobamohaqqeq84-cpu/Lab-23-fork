@@ -93,7 +93,16 @@ while (nNames < SZ_NAMES && !names[nNames].empty())++nNames;
     cout << "Added: " << g.getName() << " (" << g.getAge() << ")\n";
 }
 cout << "[0] cancel\nchoice -->";
- int choice
+ int choice;
+ cin >> choice;
+while (cin.fail() || choice < 0 || choice >= index){
+    cin.clear();
+    cin.ignore(1000, '\n');
+    cout << "Invalid choice. Try again.\n";
+    cin >> choice;
+}
+return choice;
+
 
 void delete_goat(list<Goat> &trip){
     int choice = select_goat(trip);
@@ -104,6 +113,20 @@ void delete_goat(list<Goat> &trip){
     auto it = trip.begin();
     advance(it, choice - 1);
 
-    cout << "Deleted: " << it->getName() << " (" << it ->getAge
+    cout << "Deleted: " << it->getName() << " (" << it ->getAge()<<", " << it->getColor() << ")\n";
+    trip.erase(it);
+    }
+void display_trip(list<Goat> trip){
+    cout << "\ncuurrentTrip (" << trip.size() << " goats)\n";
+    if (trip.empty()){
+        cout <<"(empty)\n";
+        return;
+    
+    }
+    int index = 1;
+    for(const auto &g: trip){
+        cout << "[" << index++ << "] " << g.getName() << " (" << g.getAge() << ", " << g.getColor() << ")\n";
+    }
+}
 
-        }
+        
