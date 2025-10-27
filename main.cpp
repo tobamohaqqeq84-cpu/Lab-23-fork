@@ -20,7 +20,7 @@ int main_menu();
 
 int main() {
     srand(time(0));
-    bool again;
+     bool again = true;
 
     // read & populate arrays for names and colors
     ifstream fin("names.txt");
@@ -34,6 +34,23 @@ int main() {
     while (fin1 >> colors[i++]);
     fin1.close();
 
+    // create list of goats
+    list<Goat> trip;
+      int choice = main_menu();// display menu and get choice
+    
+         if (choice == 1){
+             add_goat(trip, names, colors);
+         }
+        else if (choice == 2){
+            delete_goat(trip);
+        }
+        else if (choice == 3){
+            display_trip(trip);
+        }
+        else if (choice == 4){
+            cout << "goodbye!\n";
+            again = false;// stops the loop 
+        }
 
 
 
@@ -47,19 +64,21 @@ int main() {
      cout << "2) Delete a goat\n";
      cout << "3) List all goats\n";
      cout << "4) Quit\n";
+     cout << "choice -->";
      cin >> choice;
 
-     if(!(cin>>choice)) {
+    
+     while (cin.fail() || choice < 1 || choice > 4){
          cin.clear();
          cin.ignore(1000, '\n');
-         
+             cout << "Invalid choice. Try again.\n";
+        cin >> choice;
+ 
      }
-     while (choice < 1 || choice > 4)
-            cout << "Invalid choice. Try again.\n";
-     cin >> clear();
-     cin.ignore(1000, '\n');
-  
-     cin >> choice;
  
      return choice;
  }
+
+void add_goat(list<Goat> &trip, string names[], string colors[]);
+int nNames = 0;
+while 
