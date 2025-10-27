@@ -39,4 +39,27 @@ int main() {
 
     return 0;
 }
+//*************************************************************
+ int main_menu(){
+     int choice;
+     cout << " *** GOAT MANAGER 3001 ***\n";
+     cout << "1) Add a goat\n";
+     cout << "2) Delete a goat\n";
+     cout << "3) List all goats\n";
+     cout << "4) Quit\n";
+     cin >> choice;
 
+     if(!(cin>>choice)) {
+         cin.clear();
+         cin.ignore(1000, '\n');
+         
+     }
+     while (choice < 1 || choice > 4)
+            cout << "Invalid choice. Try again.\n";
+     cin >> clear();
+     cin.ignore(1000, '\n');
+  
+     cin >> choice;
+ 
+     return choice;
+ }
