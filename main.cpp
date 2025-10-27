@@ -7,6 +7,8 @@
 #include <fstream>
 #include <iomanip>
 #include <list>
+#include <cstdlib>
+#include <ctime>
 #include "Goat.h"
 using namespace std;
 
@@ -36,6 +38,7 @@ int main() {
 
     // create list of goats
     list<Goat> trip;
+    while(again){
       int choice = main_menu();// display menu and get choice
     
          if (choice == 1){
@@ -48,10 +51,10 @@ int main() {
             display_trip(trip);
         }
         else if (choice == 4){
-            cout << "goodbye!\n";
+            cout << "Goodbye!\n";
             again = false;// stops the loop 
         }
-
+    }
 
 
     return 0;
@@ -79,18 +82,29 @@ int main() {
      return choice;
  }
 void add_goat(list<Goat> &trip, string names[], string colors[]){
-int nNames = 0;
+ int nNames = 0;
 while (nNames < SZ_NAMES && !names[nNames].empty())++nNames;
  int nColors = 0;
-    while (nColors < SZ_COLORS && !colors[nColors].empty())++nColors;
+while (nColors < SZ_COLORS && !colors[nColors].empty())++nColors;
 
+    int age       = rand() % (MAX_AGE + 1);
     int nameIdx = rand() % nNames;
     int colorIdx = rand() % nColors;
-    int age = rand() % MAX_AGE + 1;
+    
 
-    Goat g(names[nameIdx], colors[colorIdx], age);
+    Goat g(names[nameIdx], age, colors[colorIdx]);
     trip.push_back(g);
-    cout << "Added: " << g.getName() << " (" << g.getAge() << ")\n";
+    cout << "Added: " << g.getName() << " (" << g.etAge() << "," << g.getColor() <<")\n";
+
+    int select_goat(list<Goat> trip){
+        if (trip.empty()){
+            cout << "(empty)\n";
+            return 0;
+        }
+        int index = 1;
+        for (const auto &g: trip)
+            cout << "[" << index++ << "] " << g.getName() << " (" << g.getAge() << ", " << g.getColor() << ")\n";
+    }
 }
 cout << "[0] cancel\nchoice -->";
  int choice;
@@ -117,7 +131,7 @@ void delete_goat(list<Goat> &trip){
     trip.erase(it);
     }
 void display_trip(list<Goat> trip){
-    cout << "\ncuurrentTrip (" << trip.size() << " goats)\n";
+    cout << "\ncuurrent Trip (" << trip.size() << " goats)\n";
     if (trip.empty()){
         cout <<"(empty)\n";
         return;
